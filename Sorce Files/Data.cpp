@@ -186,3 +186,73 @@ TEAMS getTeam(TEAMS* teams, int& teamsCount, int teamID)
 	int index = getTeamIndexByID(teams, teamsCount, teamID);
 	return teams[index];
 }
+
+void createTeamMenu(TEAMS* teams, int& teamCount, int& maxTeamID, TEACHERS* teachers, int& teacherCount, STUDENTS* students, int& studentCount)
+{
+	system("CLS");
+	TEAMS addTeam;
+	cout << " Team Name  ";
+	cin >> addTeam.teamName;
+
+	cout << "Team descritpion ";
+	cin >> addTeam.teamDescription;
+	if (checkAvailableStudents(students, studentCount, "backend")
+		and checkAvailableStudents(students, studentCount, "frontend")
+		and checkAvailableStudents(students, studentCount, "QA")
+		and checkAvailableStudents(students, studentCount, "master")
+		and teacherCount != 0)
+	{
+		cout << "Which back-end developer is in the team?" << endl;
+		showStudentsPerRole(students, studentCount, "backend");
+		int backEndID;
+		cin >> backEndID;
+		STUDENTS backend = getStudent(students, studentCount, backEndID);
+		backend.hasTeam = true;
+		updateStudent(students, studentCount, backEndID, backend);
+		addTeam.backEnd = backend;
+
+		cout << "Which front-end developer is in the team?" << endl;
+		showStudentsPerRole(students, studentCount, "frontend");
+		int frontEndID;
+		cin >> frontEndID;
+		STUDENTS frontend = getStudent(students, studentCount, frontEndID);
+		frontend.hasTeam = true;
+		updateStudent(students, studentCount, frontEndID, frontend);
+		addTeam.frontEnd = frontend;
+
+		cout << "Which quality engineer is in the team?" << endl;
+		showStudentsPerRole(students, studentCount, "QA");
+		int QAID;
+		cin >> QAID;
+		STUDENTS qa = getStudent(students, studentCount, QAID);
+		qa.hasTeam = true;
+		updateStudent(students, studentCount, QAID, qa);
+		addTeam.QA = qa;
+
+		cout << "Which scrum master is in the team?" << endl;
+		showStudentsPerRole(students, studentCount, "master");
+		int masterID;
+		cin >> masterID;
+		STUDENTS master = getStudent(students, studentCount, masterID);
+		master.hasTeam = true;
+		updateStudent(students, studentCount, masterID, master);
+		addTeam.master = master;
+
+		cout << "Which teacher is in the team?";
+		showTeachers(teachers, teacherCount, teams, teamCount);
+		int TeacherID;
+		cin >> TeacherID;
+		TEACHERS teacher = getTeacher(teachers, teacherCount, TeacherID);
+		teacher.hasTeam = true;
+		updateTeacher(teachers, teacherCount, TeacherID, teacher);
+		addTeam.teamTeacher = teacher;
+		system("CLS");
+		createTeam(teams, teamCount, maxTeamID, addTeam);
+	}
+	else
+	{
+		cout << "+-------------------------+" << endl;
+		cout << "|Team cound not be created|" << endl;
+		cout << "+-------------------------+" << endl;
+	}
+}
