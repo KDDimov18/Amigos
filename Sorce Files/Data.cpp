@@ -13,6 +13,7 @@ bool checkInteger(string str)
 	}
 	return true;
 }
+
 int getIndexById(STUDENTS* students, int count, int ID)
 {
 
@@ -26,6 +27,7 @@ int getIndexById(STUDENTS* students, int count, int ID)
 	}
 	return -1;
 }
+
 void createStudent(STUDENTS* students, int& studentCount, int& maxStudentID, STUDENTS newStudent)
 
 {
@@ -33,6 +35,7 @@ void createStudent(STUDENTS* students, int& studentCount, int& maxStudentID, STU
 	students[studentCount] = newStudent;
 	studentCount++;
 }
+
 void updateStudent(STUDENTS* students, int studentCount, int studentID, STUDENTS newStudent)
 {
 
@@ -41,6 +44,7 @@ void updateStudent(STUDENTS* students, int studentCount, int studentID, STUDENTS
 	students[index] = newStudent;
 
 }
+
 void deleteStudent(STUDENTS* students, int& studentCount, int studentID)
 {
 
@@ -54,6 +58,7 @@ void deleteStudent(STUDENTS* students, int& studentCount, int studentID)
 	studentCount--;
 
 }
+
 STUDENTS getStudent(STUDENTS* students, int& studentCount, int studentID)
 {
 
@@ -62,6 +67,7 @@ STUDENTS getStudent(STUDENTS* students, int& studentCount, int studentID)
 	return students[index];
 
 }
+
 bool checkAvailableStudents(STUDENTS* students, int& studentCount, string searchedRole)
 {
 	int studentsWithRole = 0;
@@ -82,6 +88,7 @@ bool checkAvailableStudents(STUDENTS* students, int& studentCount, string search
 		return true;
 	}
 }
+
 int getTeacherIndexByID(TEACHERS* teachers, int& teacherCount, int teacherID)
 {
 
@@ -95,6 +102,7 @@ int getTeacherIndexByID(TEACHERS* teachers, int& teacherCount, int teacherID)
 	}
 	return -1;
 }
+
 void createTeacher(TEACHERS* teachers, int& teacherCount, int& maxTeacherID, TEACHERS newTeacher)
 
 {
@@ -102,6 +110,7 @@ void createTeacher(TEACHERS* teachers, int& teacherCount, int& maxTeacherID, TEA
 	teachers[teacherCount] = newTeacher;
 	teacherCount++;
 }
+
 void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS newTeacher)
 {
 
@@ -110,6 +119,7 @@ void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS
 	teachers[index] = newTeacher;
 
 }
+
 void deleteTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
 {
 	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
@@ -120,11 +130,13 @@ void deleteTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
 	}
 	teacherCount--;
 }
+
 TEACHERS getTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
 {
 	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
 	return teachers[index];
 }
+
 int getTeamIndexByID(TEAMS* teams, int& teamsCount, int teamID)
 {
 	for (int j = 0; j < teamsCount; j++)
@@ -325,4 +337,90 @@ SCHOOLS getSchool(SCHOOLS* schools, int& schoolCount, int schoolID)
 
 	return schools[index];
 
+}
+
+void addPeopleMenu(SCHOOLS* schools, int& schoolCount, TEACHERS* teachers, int& teacherCount, STUDENTS* students, int& studentCount, TEAMS* teams, int& teamCount, int editedId)
+{
+	system("CLS");
+	cout << "+----------------+" << endl;
+	cout << "|--- ADD MENU ---|" << endl;
+	cout << "+----------------+" << endl;
+	cout << "|1. students     |" << endl;
+	cout << "|2. teachers     |" << endl;
+	cout << "|3. teams        |" << endl;
+	cout << "+----------------+" << endl;
+	string levelChoice;
+	int choice;
+	cin >> levelChoice;
+	if (checkInteger(levelChoice) == false)
+	{
+		do {
+			system("CLS");
+			cout << "+---------------------------------------------------------------------+" << endl;
+			cout << "|The value you entered was not an integer. Please enter a whole number|" << endl;
+			cout << "+---------------------------------------------------------------------+" << endl;
+			cin >> levelChoice;
+			checkInteger(levelChoice);
+		} while (checkInteger(levelChoice) == false);
+	}
+	choice = stoi(levelChoice);
+	int availableStudents;
+	int availableTeachers;
+	int availableTeams;
+	switch (choice)
+	{
+	case 1:
+		system("CLS");
+		availableStudents = showStudentsNoSchool(students, studentCount);
+		if (availableStudents > 0)
+		{
+			system("CLS");
+			SCHOOLS addPeople = getSchool(schools, schoolCount, editedId);
+			int studentId;
+			cout << "which ID?";
+			cin >> studentId;
+			STUDENTS tt = getStudent(students, studentCount, studentId);
+			tt.hasSchool = true;
+			updateStudent(students, studentCount, studentId, tt);
+			addPeople.studentsInSchool[addPeople.studentsInSchoolNum] = tt;
+			addPeople.studentsInSchoolNum = 1 + addPeople.studentsInSchoolNum;
+			updateSchool(schools, schoolCount, editedId, addPeople);
+		}
+		break;
+	case 2:
+		system("CLS");
+		availableTeachers = showTeachersNoSchool(teachers, teacherCount, teams, teamCount);
+		if (availableTeachers > 0)
+		{
+			int editedId2;
+			SCHOOLS addTeachers = getSchool(schools, schoolCount, editedId);
+			cout << "which ID?";
+			cin >> editedId2;
+			TEACHERS tt = getTeacher(teachers, teacherCount, editedId2);
+			tt.hasSchool = true;
+			updateTeacher(teachers, teacherCount, editedId2, tt);
+			addTeachers.teachersInSchool[addTeachers.teachersInSchoolNum] = tt;
+			addTeachers.teachersInSchoolNum = 1 + addTeachers.teachersInSchoolNum;
+			updateSchool(schools, schoolCount, editedId, addTeachers);
+		}
+		break;
+	case 3:
+		system("CLS");
+		availableTeams = showTeamsNoSchool(teams, teamCount);
+		if (availableTeams > 0)
+		{
+			system("CLS");
+			int editedId3;
+			SCHOOLS addPeople = getSchool(schools, schoolCount, editedId);
+			cout << "which ID?";
+			cin >> editedId3;
+			TEAMS tt = getTeam(teams, teamCount, editedId3);
+			tt.hasSchool = true;
+			updateTeam(teams, teamCount, editedId3, tt);
+			addPeople.teamsInSchool[addPeople.teamsInSchoolNum] = tt;
+			addPeople.teamsInSchoolNum = 1 + addPeople.teamsInSchoolNum;
+			updateSchool(schools, schoolCount, editedId, addPeople);
+		}
+		break;
+	}
 }
