@@ -120,3 +120,8 @@ void deleteTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
 	}
 	teacherCount--;
 }
+TEACHERS getTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
+{
+	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
+	return teachers[index];
+}
