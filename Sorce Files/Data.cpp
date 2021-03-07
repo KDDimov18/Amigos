@@ -95,3 +95,18 @@ int getTeacherIndexByID(TEACHERS* teachers, int& teacherCount, int teacherID)
 	}
 	return -1;
 }
+void createTeacher(TEACHERS* teachers, int& teacherCount, int& maxTeacherID, TEACHERS newTeacher)
+
+{
+	newTeacher.teacherID = maxTeacherID++;
+	teachers[teacherCount] = newTeacher;
+	teacherCount++;
+}
+void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS newTeacher)
+{
+
+	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
+
+	teachers[index] = newTeacher;
+
+}
