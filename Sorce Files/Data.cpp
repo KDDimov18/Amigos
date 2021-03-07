@@ -33,3 +33,11 @@ void createStudent(STUDENTS* students, int& studentCount, int& maxStudentID, STU
 	students[studentCount] = newStudent;
 	studentCount++;
 }
+void updateStudent(STUDENTS* students, int studentCount, int studentID, STUDENTS newStudent)
+{
+
+	int index = getIndexById(students, studentCount, studentID);
+
+	students[index] = newStudent;
+
+}
