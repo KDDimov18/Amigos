@@ -54,3 +54,11 @@ void deleteStudent(STUDENTS* students, int& studentCount, int studentID)
 	studentCount--;
 
 }
+STUDENTS getStudent(STUDENTS* students, int& studentCount, int studentID)
+{
+
+	int index = getIndexById(students, studentCount, studentID);
+
+	return students[index];
+
+}
