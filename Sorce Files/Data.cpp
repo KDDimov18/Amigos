@@ -62,3 +62,23 @@ STUDENTS getStudent(STUDENTS* students, int& studentCount, int studentID)
 	return students[index];
 
 }
+bool checkAvailableStudents(STUDENTS* students, int& studentCount, string searchedRole)
+{
+	int studentsWithRole = 0;
+	for (int i = 0; i < studentCount; i++)
+	{
+		if (students[i].role == searchedRole and students[i].hasTeam == false)
+		{
+			studentsWithRole++;
+		}
+	}
+	if (studentsWithRole == 0)
+	{
+		cout << "there are no available students with this role." << endl;
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
