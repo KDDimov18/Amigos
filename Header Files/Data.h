@@ -57,3 +57,8 @@ void updateStudent(STUDENTS* students, int studentCount, int studentID, STUDENTS
 void deleteStudent(STUDENTS* students, int& studentCount, int studentID);
 STUDENTS getStudent(STUDENTS* students, int& studentCount, int studentID);
 bool checkAvailableStudents(STUDENTS* students, int& studentCount, string searchedRole);
+int getTeacherIndexByID(TEACHERS* teachers, int& teacherCount, int teacherID);
+void createTeacher(TEACHERS* teachers, int& teacherCount, int& maxTeacherID, TEACHERS newTeacher);
+void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS newTeacher);
+void deleteTeacher(TEACHERS* teachers, int& teacherCount, int teacherID);
+TEACHERS getTeacher(TEACHERS* teachers, int& teacherCount, int teacherID);
