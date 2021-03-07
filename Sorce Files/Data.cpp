@@ -110,3 +110,13 @@ void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS
 	teachers[index] = newTeacher;
 
 }
+void deleteTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
+{
+	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
+
+	for (int j = index; j < teacherCount - 1; j++)
+	{
+		teachers[j] = teachers[j + 1];
+	}
+	teacherCount--;
+}
