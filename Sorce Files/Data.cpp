@@ -125,3 +125,14 @@ TEACHERS getTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
 	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
 	return teachers[index];
 }
+int getTeamIndexByID(TEAMS* teams, int& teamsCount, int teamID)
+{
+	for (int j = 0; j < teamsCount; j++)
+	{
+		if (teams[j].teamID == teamID)
+		{
+			return j;
+		}
+	}
+	return -1;
+}
