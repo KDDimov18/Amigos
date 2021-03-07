@@ -82,3 +82,16 @@ bool checkAvailableStudents(STUDENTS* students, int& studentCount, string search
 		return true;
 	}
 }
+int getTeacherIndexByID(TEACHERS* teachers, int& teacherCount, int teacherID)
+{
+
+	for (int j = 0; j < teacherCount; j++)
+	{
+		if (teachers[j].teacherID == teacherID)
+		{
+			return j;
+		}
+
+	}
+	return -1;
+}
