@@ -41,3 +41,16 @@ void updateStudent(STUDENTS* students, int studentCount, int studentID, STUDENTS
 	students[index] = newStudent;
 
 }
+void deleteStudent(STUDENTS* students, int& studentCount, int studentID)
+{
+
+	int index = getIndexById(students, studentCount, studentID);
+
+	for (int j = index; j < studentCount - 1; j++)
+	{
+		students[j] = students[j + 1];
+	}
+
+	studentCount--;
+
+}
