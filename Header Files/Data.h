@@ -62,3 +62,8 @@ void createTeacher(TEACHERS* teachers, int& teacherCount, int& maxTeacherID, TEA
 void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS newTeacher);
 void deleteTeacher(TEACHERS* teachers, int& teacherCount, int teacherID);
 TEACHERS getTeacher(TEACHERS* teachers, int& teacherCount, int teacherID);
+int getTeamIndexByID(TEAMS* teams, int& teamsCount, int teamID);
+void createTeam(TEAMS* teams, int& teamsCount, int& maxTeamID, TEAMS newTeam);
+void updateTeam(TEAMS* teams, int teamsCount, int teamID, TEAMS newTeam);
+void deleteTeam(TEAMS* teams, int& teamsCount, int teamID, STUDENTS* students, int& studentCount, TEACHERS* teachers, int& teacherCount);
+TEAMS getTeam(TEAMS* teams, int& teamsCount, int teamID);
