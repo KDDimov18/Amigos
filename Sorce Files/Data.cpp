@@ -256,3 +256,16 @@ void createTeamMenu(TEAMS* teams, int& teamCount, int& maxTeamID, TEACHERS* teac
 		cout << "+-------------------------+" << endl;
 	}
 }
+
+int getSchoolIndexByID(SCHOOLS* schools, int& schoolCount, int schoolID)
+{
+	for (int j = 0; j < schoolCount; j++)
+	{
+		if (schools[j].schoolID == schoolID)
+		{
+			return j;
+		}
+
+	}
+	return -1;
+}
