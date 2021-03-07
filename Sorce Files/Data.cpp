@@ -317,3 +317,12 @@ void deleteSchool(SCHOOLS* schools, int& schoolCount, int schoolID, STUDENTS* st
 	schoolCount--;
 
 }
+
+SCHOOLS getSchool(SCHOOLS* schools, int& schoolCount, int schoolID)
+{
+
+	int index = getSchoolIndexByID(schools, schoolCount, schoolID);
+
+	return schools[index];
+
+}
