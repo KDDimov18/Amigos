@@ -180,3 +180,9 @@ void deleteTeam(TEAMS* teams, int& teamsCount, int teamID, STUDENTS* students, i
 	}
 	teamsCount--;
 }
+
+TEAMS getTeam(TEAMS* teams, int& teamsCount, int teamID)
+{
+	int index = getTeamIndexByID(teams, teamsCount, teamID);
+	return teams[index];
+}
