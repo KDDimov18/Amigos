@@ -102,3 +102,11 @@ void createTeacher(TEACHERS* teachers, int& teacherCount, int& maxTeacherID, TEA
 	teachers[teacherCount] = newTeacher;
 	teacherCount++;
 }
+void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS newTeacher)
+{
+
+	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
+
+	teachers[index] = newTeacher;
+
+}
