@@ -269,3 +269,19 @@ int getSchoolIndexByID(SCHOOLS* schools, int& schoolCount, int schoolID)
 	}
 	return -1;
 }
+
+void createSchool(SCHOOLS* schools, int& schoolCount, int& maxSchoolID, SCHOOLS newSchool)
+{
+	newSchool.schoolID = maxSchoolID++;
+	schools[schoolCount] = newSchool;
+	schoolCount++;
+}
+
+void updateSchool(SCHOOLS* schools, int schoolCount, int schoolID, SCHOOLS newSchool)
+{
+
+	int index = getSchoolIndexByID(schools, schoolCount, schoolID);
+
+	schools[index] = newSchool;
+
+}
