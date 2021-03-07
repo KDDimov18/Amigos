@@ -144,3 +144,9 @@ void createTeam(TEAMS* teams, int& teamsCount, int& maxTeamID, TEAMS newTeam)
 	teams[teamsCount] = newTeam;
 	teamsCount++;
 }
+
+void updateTeam(TEAMS* teams, int teamsCount, int teamID, TEAMS newTeam)
+{
+	int index = getTeamIndexByID(teams, teamsCount, teamID);
+	teams[index] = newTeam;
+}
