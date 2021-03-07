@@ -26,3 +26,10 @@ int getIndexById(STUDENTS* students, int count, int ID)
 	}
 	return -1;
 }
+void createStudent(STUDENTS* students, int& studentCount, int& maxStudentID, STUDENTS newStudent)
+
+{
+	newStudent.studentID = maxStudentID++;
+	students[studentCount] = newStudent;
+	studentCount++;
+}
