@@ -150,3 +150,33 @@ void updateTeam(TEAMS* teams, int teamsCount, int teamID, TEAMS newTeam)
 	int index = getTeamIndexByID(teams, teamsCount, teamID);
 	teams[index] = newTeam;
 }
+
+void deleteTeam(TEAMS* teams, int& teamsCount, int teamID, STUDENTS* students, int& studentCount, TEACHERS* teachers, int& teacherCount)
+{
+	int index = getTeamIndexByID(teams, teamsCount, teamID);
+	TEAMS team = getTeam(teams, teamsCount, teamID);
+	STUDENTS backend = getStudent(students, studentCount, team.backEnd.studentID);
+	backend.hasTeam = false;
+	updateStudent(students, studentCount, team.backEnd.studentID, backend);
+
+	STUDENTS frontend = getStudent(students, studentCount, team.frontEnd.studentID);
+	frontend.hasTeam = false;
+	updateStudent(students, studentCount, team.frontEnd.studentID, frontend);
+
+	STUDENTS master = getStudent(students, studentCount, team.master.studentID);
+	master.hasTeam = false;
+	updateStudent(students, studentCount, team.master.studentID, master);
+
+	STUDENTS qa = getStudent(students, studentCount, team.QA.studentID);
+	qa.hasTeam = false;
+	updateStudent(students, studentCount, team.QA.studentID, qa);
+
+	TEACHERS teach = getTeacher(teachers, teacherCount, team.teamTeacher.teacherID);
+	teach.hasTeam = false;
+	updateTeacher(teachers, teacherCount, team.teamTeacher.teacherID, teach);
+	for (int j = index; j < teamsCount - 1; j++)
+	{
+		teams[j] = teams[j + 1];
+	}
+	teamsCount--;
+}
