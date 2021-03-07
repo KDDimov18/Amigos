@@ -110,3 +110,37 @@ void updateTeacher(TEACHERS* teachers, int teacherCount, int teacherID, TEACHERS
 	teachers[index] = newTeacher;
 
 }
+void deleteTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
+{
+	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
+
+	for (int j = index; j < teacherCount - 1; j++)
+	{
+		teachers[j] = teachers[j + 1];
+	}
+	teacherCount--;
+}
+TEACHERS getTeacher(TEACHERS* teachers, int& teacherCount, int teacherID)
+{
+	int index = getTeacherIndexByID(teachers, teacherCount, teacherID);
+	return teachers[index];
+}
+int getTeamIndexByID(TEAMS* teams, int& teamsCount, int teamID)
+{
+	for (int j = 0; j < teamsCount; j++)
+	{
+		if (teams[j].teamID == teamID)
+		{
+			return j;
+		}
+	}
+	return -1;
+}
+
+void createTeam(TEAMS* teams, int& teamsCount, int& maxTeamID, TEAMS newTeam)
+
+{
+	newTeam.teamID = maxTeamID++;
+	teams[teamsCount] = newTeam;
+	teamsCount++;
+}
