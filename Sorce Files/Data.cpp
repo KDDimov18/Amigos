@@ -41,3 +41,57 @@ void updateStudent(STUDENTS* students, int studentCount, int studentID, STUDENTS
 	students[index] = newStudent;
 
 }
+void deleteStudent(STUDENTS* students, int& studentCount, int studentID)
+{
+
+	int index = getIndexById(students, studentCount, studentID);
+
+	for (int j = index; j < studentCount - 1; j++)
+	{
+		students[j] = students[j + 1];
+	}
+
+	studentCount--;
+
+}
+STUDENTS getStudent(STUDENTS* students, int& studentCount, int studentID)
+{
+
+	int index = getIndexById(students, studentCount, studentID);
+
+	return students[index];
+
+}
+bool checkAvailableStudents(STUDENTS* students, int& studentCount, string searchedRole)
+{
+	int studentsWithRole = 0;
+	for (int i = 0; i < studentCount; i++)
+	{
+		if (students[i].role == searchedRole and students[i].hasTeam == false)
+		{
+			studentsWithRole++;
+		}
+	}
+	if (studentsWithRole == 0)
+	{
+		cout << "there are no available students with this role." << endl;
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+int getTeacherIndexByID(TEACHERS* teachers, int& teacherCount, int teacherID)
+{
+
+	for (int j = 0; j < teacherCount; j++)
+	{
+		if (teachers[j].teacherID == teacherID)
+		{
+			return j;
+		}
+
+	}
+	return -1;
+}
