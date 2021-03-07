@@ -136,3 +136,11 @@ int getTeamIndexByID(TEAMS* teams, int& teamsCount, int teamID)
 	}
 	return -1;
 }
+
+void createTeam(TEAMS* teams, int& teamsCount, int& maxTeamID, TEAMS newTeam)
+
+{
+	newTeam.teamID = maxTeamID++;
+	teams[teamsCount] = newTeam;
+	teamsCount++;
+}
