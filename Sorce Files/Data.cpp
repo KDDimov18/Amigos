@@ -285,3 +285,35 @@ void updateSchool(SCHOOLS* schools, int schoolCount, int schoolID, SCHOOLS newSc
 	schools[index] = newSchool;
 
 }
+
+void deleteSchool(SCHOOLS* schools, int& schoolCount, int schoolID, STUDENTS* students, int studentCount, TEACHERS* teachers, int teacherCount, TEAMS* teams, int teamCount)
+{
+
+	int index = getSchoolIndexByID(schools, schoolCount, schoolID);
+	SCHOOLS del = getSchool(schools, schoolCount, schoolID);
+	for (int i = 0; i < del.studentsInSchoolNum; i++)
+	{
+		STUDENTS removeStudents = getStudent(students, studentCount, del.studentsInSchool[i].studentID);
+		removeStudents.hasSchool = false;
+		updateStudent(students, studentCount, del.studentsInSchool[i].studentID, removeStudents);
+	}
+	for (int i = 0; i < del.teachersInSchoolNum; i++)
+	{
+		TEACHERS removeTeachers = getTeacher(teachers, teacherCount, del.teachersInSchool[i].teacherID);
+		removeTeachers.hasSchool = false;
+		updateTeacher(teachers, teacherCount, del.teachersInSchool[i].teacherID, removeTeachers);
+	}
+	for (int i = 0; i < del.teamsInSchoolNum; i++)
+	{
+		TEAMS removeTeams = getTeam(teams, teacherCount, del.teamsInSchool[i].teamID);
+		removeTeams.hasSchool = false;
+		updateTeam(teams, teamCount, del.teamsInSchool[i].teamID, removeTeams);
+	}
+	for (int j = index; j < schoolCount - 1; j++)
+	{
+		schools[j] = schools[j + 1];
+	}
+
+	schoolCount--;
+
+}
